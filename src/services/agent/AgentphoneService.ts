@@ -1,7 +1,5 @@
 import { HttpClient } from "../../http.js";
-import { RequestOptions } from "../../types.js";
-
-
+import type { RequestOptions } from "../../types.js";
 
 export class AgentphoneService {
   constructor(private client: HttpClient) {}

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi } from "vite-plus/test";
 import NiceCXoneClient from "../../src/index.js";
 
 describe("Authentication Domain Services", () => {
@@ -13,7 +13,7 @@ describe("Authentication Domain Services", () => {
         JSON.stringify({
           resetResult: { passwordComplexityResult: "SUCCESS" },
         }),
-        { status: 200, headers: { "Content-Type": "application/json" } }
+        { status: 200, headers: { "Content-Type": "application/json" } },
       );
     });
 

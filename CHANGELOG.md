@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-07-27
 
 ### Added
+
 - **Complete NICE CXone / inContact API Support**: Full TypeScript SDK covering all 73 OpenAPI 3.0.3 specifications and 501 endpoints published on [developer.niceincontact.com](https://developer.niceincontact.com/API/AdminAPI).
 - **18 Specialized API Domains**:
   - `admin`: Address Book, Agent Messages, Agents, Commitments, Contacts, General, Groups, Lists, Routing Attributes, Script Schedules, Skills, Station Profiles, Stations, Unavailable Codes, Workflow Data.

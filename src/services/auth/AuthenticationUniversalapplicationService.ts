@@ -1,7 +1,5 @@
 import { HttpClient } from "../../http.js";
-import { RequestOptions } from "../../types.js";
-
-
+import type { RequestOptions } from "../../types.js";
 
 export class AuthenticationUniversalapplicationService {
   constructor(private client: HttpClient) {}
@@ -19,7 +17,7 @@ export class AuthenticationUniversalapplicationService {
    * It will receive requests with auth code and exchange actual tokens from the global authentication service
    * GET /callback
    */
-  public async getCallback(options?: RequestOptions & { query?: { code: string; } }): Promise<any> {
+  public async getCallback(options?: RequestOptions & { query?: { code: string } }): Promise<any> {
     const path = `/callback`;
     return this.client.get<any>(path, options);
   }

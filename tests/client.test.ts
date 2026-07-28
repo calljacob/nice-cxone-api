@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi } from "vite-plus/test";
 import NiceCXoneClient, { NiceCXoneAPIError } from "../src/index.js";
 
 describe("NiceCXoneClient", () => {
@@ -41,10 +41,13 @@ describe("NiceCXoneClient", () => {
     const mockFetch = vi.fn().mockImplementation(async (url: string, init?: RequestInit) => {
       capturedUrl = url;
       capturedHeaders = (init?.headers as Record<string, string>) || {};
-      return new Response(JSON.stringify({ agents: [{ agentId: 1001, firstName: "Jane", lastName: "Doe" }] }), {
-        status: 200,
-        headers: { "Content-Type": "application/json", "CorrelationId": "corr-resp-123" }
-      });
+      return new Response(
+        JSON.stringify({ agents: [{ agentId: 1001, firstName: "Jane", lastName: "Doe" }] }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json", CorrelationId: "corr-resp-123" },
+        },
+      );
     });
 
     const client = new NiceCXoneClient({
@@ -55,11 +58,13 @@ describe("NiceCXoneClient", () => {
     });
 
     const response = await client.admin.agents.getAgents({
-      query: { top: "10", skip: "0" }
+      query: { top: "10", skip: "0" },
     });
 
     expect(mockFetch).toHaveBeenCalledOnce();
-    expect(capturedUrl).toContain("https://api-na1.niceincontact.com/inContactAPI/services/v3.0/agents");
+    expect(capturedUrl).toContain(
+      "https://api-na1.niceincontact.com/inContactAPI/services/v3.0/agents",
+    );
     expect(capturedUrl).toContain("top=10");
     expect(capturedUrl).toContain("skip=0");
     expect(capturedHeaders["Authorization"]).toBe("Bearer my-secret-access-token");
@@ -77,7 +82,10 @@ describe("NiceCXoneClient", () => {
     let capturedToken = "";
     const mockFetch = vi.fn().mockImplementation(async (_url: string, init?: RequestInit) => {
       capturedToken = (init?.headers as Record<string, string>)["Authorization"];
-      return new Response(JSON.stringify({ addressBooks: [] }), { status: 200, headers: { "Content-Type": "application/json" } });
+      return new Response(JSON.stringify({ addressBooks: [] }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
     });
 
     const client = new NiceCXoneClient({
@@ -95,8 +103,16 @@ describe("NiceCXoneClient", () => {
   it("throws NiceCXoneAPIError on non-2xx responses with correlation ID", async () => {
     const mockFetch = vi.fn().mockImplementation(async () => {
       return new Response(
-        JSON.stringify({ error: "unauthorized", error_description: "Access token has expired", correlationId: "corr-err-999" }),
-        { status: 401, statusText: "Unauthorized", headers: { "Content-Type": "application/json" } }
+        JSON.stringify({
+          error: "unauthorized",
+          error_description: "Access token has expired",
+          correlationId: "corr-err-999",
+        }),
+        {
+          status: 401,
+          statusText: "Unauthorized",
+          headers: { "Content-Type": "application/json" },
+        },
       );
     });
 
@@ -121,7 +137,10 @@ describe("NiceCXoneClient", () => {
     let capturedUrl = "";
     const mockFetch = vi.fn().mockImplementation(async (url: string) => {
       capturedUrl = url;
-      return new Response(JSON.stringify({ addressBookId: 123 }), { status: 200, headers: { "Content-Type": "application/json" } });
+      return new Response(JSON.stringify({ addressBookId: 123 }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
     });
 
     const client = new NiceCXoneClient({

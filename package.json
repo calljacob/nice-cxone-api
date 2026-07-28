@@ -2,6 +2,22 @@
   "name": "@calljacob/nice-cxone-api",
   "version": "1.0.0",
   "description": "Comprehensive TypeScript API client for NICE CXone / inContact APIs",
+  "keywords": [
+    "api",
+    "calljacob",
+    "contact-center",
+    "cxone",
+    "incontact",
+    "nice",
+    "niceincontact",
+    "sdk",
+    "typescript"
+  ],
+  "license": "MIT",
+  "author": "Call Jacob",
+  "files": [
+    "dist"
+  ],
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -12,35 +28,19 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": [
-    "dist"
-  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsup",
     "generate": "node scripts/generate-client.js",
     "check-types": "tsc --noEmit",
     "test": "vitest run"
   },
-  "keywords": [
-    "nice",
-    "cxone",
-    "niceincontact",
-    "incontact",
-    "api",
-    "sdk",
-    "typescript",
-    "calljacob",
-    "contact-center"
-  ],
-  "author": "Call Jacob",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
   "devDependencies": {
     "@types/node": "^20.11.0",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",
-    "vitest": "^1.2.1"
+    "vitest": "^4.1.10"
   }
 }

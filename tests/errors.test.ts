@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect } from "vite-plus/test";
 import { NiceCXoneError, NiceCXoneAPIError, NiceCXoneAuthError } from "../src/errors.js";
 
 describe("Custom Errors", () => {
@@ -23,8 +23,12 @@ describe("Custom Errors", () => {
     const err = new NiceCXoneAPIError(
       404,
       "Not Found",
-      { error: "agent_not_found", error_description: "Agent 999 does not exist", correlationId: "corr-404" },
-      "corr-header-404"
+      {
+        error: "agent_not_found",
+        error_description: "Agent 999 does not exist",
+        correlationId: "corr-404",
+      },
+      "corr-header-404",
     );
 
     expect(err.name).toBe("NiceCXoneAPIError");

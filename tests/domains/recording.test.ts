@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi } from "vite-plus/test";
 import NiceCXoneClient from "../../src/index.js";
 
 describe("Recording Domain Services", () => {
@@ -7,10 +7,10 @@ describe("Recording Domain Services", () => {
 
     const mockFetch = vi.fn().mockImplementation(async (url: string) => {
       capturedUrl = url;
-      return new Response(
-        JSON.stringify({ success: true }),
-        { status: 200, headers: { "Content-Type": "application/json" } }
-      );
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
     });
 
     const client = new NiceCXoneClient({ fetch: mockFetch as any });

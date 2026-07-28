@@ -14,12 +14,12 @@ Generated directly from official OpenAPI 3.0.3 specifications published on [deve
 
 NICE publishes frontend client SDKs under the `@nice-devone/*` npm scope (such as `@nice-devone/agent-sdk`, `@nice-devone/voice-sdk`, `@nice-devone/ui-controls`). Here is how `@calljacob/nice-cxone-api` compares and complements them:
 
-| Feature / Goal | `@calljacob/nice-cxone-api` (This Package) | `@nice-devone/*` Official SDKs |
-| :--- | :--- | :--- |
-| **Primary Use Case** | Server-side & Node.js backend integration, administrative automation, reporting, user provisioning, pipeline tooling | Custom browser-based Agent applications, softphone UI widgets, CXone Agent integrations |
-| **Target Environment** | Node.js (18+), Serverless (AWS Lambda, Cloudflare Workers), Bun, Deno, and Browser | Web Browsers (requires DOM / WebRTC / WebSockets) |
-| **API Coverage** | **All 18 REST Domains** (Admin, UserHub, Reporting, Skills, Address Book, Recording, Privacy, WFM, etc.) | Frontend Agent & Voice/Chat event SDKs |
-| **Dependencies** | **Zero runtime dependencies** (built on native `fetch`) | Browser UI controls, i18n, WebRTC wrappers |
+| Feature / Goal         | `@calljacob/nice-cxone-api` (This Package)                                                                           | `@nice-devone/*` Official SDKs                                                          |
+| :--------------------- | :------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
+| **Primary Use Case**   | Server-side & Node.js backend integration, administrative automation, reporting, user provisioning, pipeline tooling | Custom browser-based Agent applications, softphone UI widgets, CXone Agent integrations |
+| **Target Environment** | Node.js (18+), Serverless (AWS Lambda, Cloudflare Workers), Bun, Deno, and Browser                                   | Web Browsers (requires DOM / WebRTC / WebSockets)                                       |
+| **API Coverage**       | **All 18 REST Domains** (Admin, UserHub, Reporting, Skills, Address Book, Recording, Privacy, WFM, etc.)             | Frontend Agent & Voice/Chat event SDKs                                                  |
+| **Dependencies**       | **Zero runtime dependencies** (built on native `fetch`)                                                              | Browser UI controls, i18n, WebRTC wrappers                                              |
 
 ---
 
@@ -66,7 +66,7 @@ const client = new NiceCXoneClient({
 async function run() {
   try {
     const response = await client.admin.agents.getAgents({
-      query: { top: "10", skip: "0", isActive: true }
+      query: { top: "10", skip: "0", isActive: true },
     });
 
     console.log(`Found ${response.totalRecords} active agents:`);
@@ -87,26 +87,26 @@ run();
 
 All 73 API services are grouped under clean domain namespaces on `NiceCXoneClient`:
 
-| Domain | Property | Description |
-| :--- | :--- | :--- |
-| **Admin** | `client.admin` | Agents, Skills, Address Books, Groups, Lists, Commitments, Stations, Unavailable Codes, Workflow Data, Script Schedules |
-| **Agent** | `client.agent` | Phone Calls, Sessions, Supervisor, Chat Requests, Emails, Scheduled Callbacks, Voicemails, Work Items, Personal Connection |
-| **Authentication** | `client.auth` | Authenticate, Global Authentication, Integrations, Universal Application |
-| **Patron** | `client.patron` | Callbacks, Chat Requests, Work Items |
-| **Real-Time Data** | `client.realtime` | Real-time agent & contact status metrics |
-| **Reporting** | `client.reporting` | Reporting & Data Lake APIs |
-| **UserHub** | `client.userhub` | User Management, SCIM, Authorization, Billing, Access Keys, Desktop Profiles, Documents, Divisions |
-| **Digital Engagement** | `client.digitalEngagement` | Channels, Messages, Contacts, Customers, Tags, Custom Fields, Routing Queues, Threads |
-| **Recording** | `client.recording` | Interaction Recordings, Screen Recording, Recording On-Demand, Recording Status |
-| **Media Playback** | `client.mediaPlayback` | Media Playback & Download Services |
-| **WFM** | `client.wfm` | Workforce Management Schedule Export, Import Allotment, Summary |
-| **Data Extraction** | `client.dataExtraction` | Data Extraction APIs |
-| **Business Data** | `client.businessData` | Custom Business Data APIs |
-| **Interaction Analytics** | `client.interactionAnalytics` | Speech & Interaction Analytics |
-| **Privacy** | `client.privacy` | GDPR & Data Privacy Compliance |
-| **Data Policy** | `client.dataPolicy` | Policy Instance Management |
-| **Voice Biometrics** | `client.voiceBiometrics` | Voice Biometric Hub External APIs |
-| **Feedback Management** | `client.feedbackManagement` | Customer Feedback & Survey APIs |
+| Domain                    | Property                      | Description                                                                                                                |
+| :------------------------ | :---------------------------- | :------------------------------------------------------------------------------------------------------------------------- |
+| **Admin**                 | `client.admin`                | Agents, Skills, Address Books, Groups, Lists, Commitments, Stations, Unavailable Codes, Workflow Data, Script Schedules    |
+| **Agent**                 | `client.agent`                | Phone Calls, Sessions, Supervisor, Chat Requests, Emails, Scheduled Callbacks, Voicemails, Work Items, Personal Connection |
+| **Authentication**        | `client.auth`                 | Authenticate, Global Authentication, Integrations, Universal Application                                                   |
+| **Patron**                | `client.patron`               | Callbacks, Chat Requests, Work Items                                                                                       |
+| **Real-Time Data**        | `client.realtime`             | Real-time agent & contact status metrics                                                                                   |
+| **Reporting**             | `client.reporting`            | Reporting & Data Lake APIs                                                                                                 |
+| **UserHub**               | `client.userhub`              | User Management, SCIM, Authorization, Billing, Access Keys, Desktop Profiles, Documents, Divisions                         |
+| **Digital Engagement**    | `client.digitalEngagement`    | Channels, Messages, Contacts, Customers, Tags, Custom Fields, Routing Queues, Threads                                      |
+| **Recording**             | `client.recording`            | Interaction Recordings, Screen Recording, Recording On-Demand, Recording Status                                            |
+| **Media Playback**        | `client.mediaPlayback`        | Media Playback & Download Services                                                                                         |
+| **WFM**                   | `client.wfm`                  | Workforce Management Schedule Export, Import Allotment, Summary                                                            |
+| **Data Extraction**       | `client.dataExtraction`       | Data Extraction APIs                                                                                                       |
+| **Business Data**         | `client.businessData`         | Custom Business Data APIs                                                                                                  |
+| **Interaction Analytics** | `client.interactionAnalytics` | Speech & Interaction Analytics                                                                                             |
+| **Privacy**               | `client.privacy`              | GDPR & Data Privacy Compliance                                                                                             |
+| **Data Policy**           | `client.dataPolicy`           | Policy Instance Management                                                                                                 |
+| **Voice Biometrics**      | `client.voiceBiometrics`      | Voice Biometric Hub External APIs                                                                                          |
+| **Feedback Management**   | `client.feedbackManagement`   | Customer Feedback & Survey APIs                                                                                            |
 
 ---
 
@@ -128,8 +128,8 @@ const newAgent = await client.admin.agents.operationsAgentsPostAgents({
       country: "USA",
       city: "Salt Lake City",
       timeZone: "America/Denver",
-    }
-  ]
+    },
+  ],
 });
 
 // Get Agent by ID

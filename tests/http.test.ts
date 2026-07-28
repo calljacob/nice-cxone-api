@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi } from "vite-plus/test";
 import { HttpClient } from "../src/http.js";
 import { NiceCXoneAPIError } from "../src/errors.js";
 
@@ -40,7 +40,8 @@ describe("HttpClient", () => {
   });
 
   it("handles POST, PUT, PATCH, and DELETE requests with body", async () => {
-    const calls: Array<{ method: string; body: string | undefined; contentType: string | null }> = [];
+    const calls: Array<{ method: string; body: string | undefined; contentType: string | null }> =
+      [];
 
     const mockFetch = vi.fn().mockImplementation(async (_url: string, init?: RequestInit) => {
       const headers = new Headers(init?.headers);
@@ -63,10 +64,26 @@ describe("HttpClient", () => {
     await client.delete("/test-delete", { id: 123 });
 
     expect(calls).toHaveLength(4);
-    expect(calls[0]).toEqual({ method: "POST", body: '{"name":"test-post"}', contentType: "application/json" });
-    expect(calls[1]).toEqual({ method: "PUT", body: '{"name":"test-put"}', contentType: "application/json" });
-    expect(calls[2]).toEqual({ method: "PATCH", body: '{"name":"test-patch"}', contentType: "application/json" });
-    expect(calls[3]).toEqual({ method: "DELETE", body: '{"id":123}', contentType: "application/json" });
+    expect(calls[0]).toEqual({
+      method: "POST",
+      body: '{"name":"test-post"}',
+      contentType: "application/json",
+    });
+    expect(calls[1]).toEqual({
+      method: "PUT",
+      body: '{"name":"test-put"}',
+      contentType: "application/json",
+    });
+    expect(calls[2]).toEqual({
+      method: "PATCH",
+      body: '{"name":"test-patch"}',
+      contentType: "application/json",
+    });
+    expect(calls[3]).toEqual({
+      method: "DELETE",
+      body: '{"id":123}',
+      contentType: "application/json",
+    });
   });
 
   it("handles 204 No Content response", async () => {

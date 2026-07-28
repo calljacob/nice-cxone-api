@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi } from "vite-plus/test";
 import NiceCXoneClient from "../../src/index.js";
 
 describe("UserHub Domain Services", () => {
@@ -11,7 +11,7 @@ describe("UserHub Domain Services", () => {
         JSON.stringify({
           users: [{ id: "usr-1", emailAddress: "john@example.com" }],
         }),
-        { status: 200, headers: { "Content-Type": "application/json" } }
+        { status: 200, headers: { "Content-Type": "application/json" } },
       );
     });
 

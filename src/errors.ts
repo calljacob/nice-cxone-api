@@ -1,4 +1,4 @@
-import { APIErrorPayload } from "./types.js";
+import type { APIErrorPayload } from "./types.js";
 
 /**
  * Base error class for NICE CXone SDK errors
@@ -24,9 +24,10 @@ export class NiceCXoneAPIError extends NiceCXoneError {
     status: number,
     statusText: string,
     errorPayload?: APIErrorPayload,
-    correlationId?: string
+    correlationId?: string,
   ) {
-    const detail = errorPayload?.error_description || errorPayload?.message || errorPayload?.error || statusText;
+    const detail =
+      errorPayload?.error_description || errorPayload?.message || errorPayload?.error || statusText;
     super(`NICE CXone API Error [${status}]: ${detail}`);
     this.name = "NiceCXoneAPIError";
     this.status = status;

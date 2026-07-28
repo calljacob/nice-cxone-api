@@ -1,4 +1,4 @@
-import { ClientConfig, RequestOptions, APIErrorPayload } from "./types.js";
+import type { ClientConfig, RequestOptions, APIErrorPayload } from "./types.js";
 import { NiceCXoneAPIError } from "./errors.js";
 
 export class HttpClient {
@@ -10,7 +10,9 @@ export class HttpClient {
   private timeout: number;
 
   constructor(config: ClientConfig = {}) {
-    this.baseUrl = (config.baseUrl || "https://api.incontact.com/inContactAPI/services/v3.0").replace(/\/+$/, "");
+    this.baseUrl = (
+      config.baseUrl || "https://api.incontact.com/inContactAPI/services/v3.0"
+    ).replace(/\/+$/, "");
     this.accessToken = config.accessToken;
     this.defaultCorrelationId = config.correlationId;
     this.defaultHeaders = config.headers || {};
@@ -48,13 +50,13 @@ export class HttpClient {
     method: string,
     path: string,
     body?: any,
-    options: RequestOptions = {}
+    options: RequestOptions = {},
   ): Promise<T> {
     const token = await this.getAccessToken();
     const correlationId = options.correlationId || this.defaultCorrelationId;
 
     const headers: Record<string, string> = {
-      "Accept": "application/json",
+      Accept: "application/json",
       ...this.defaultHeaders,
       ...options.headers,
     };
@@ -104,7 +106,7 @@ export class HttpClient {
           response.status,
           response.statusText,
           errorPayload,
-          responseCorrelationId || undefined
+          responseCorrelationId || undefined,
         );
       }
 

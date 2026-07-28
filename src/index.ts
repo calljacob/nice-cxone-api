@@ -1,5 +1,5 @@
 import { HttpClient } from "./http.js";
-import { ClientConfig } from "./types.js";
+import type { ClientConfig } from "./types.js";
 import { AdminDomain } from "./services/admin/index.js";
 import { AgentDomain } from "./services/agent/index.js";
 import { AuthDomain } from "./services/auth/index.js";

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi } from "vite-plus/test";
 import NiceCXoneClient from "../../src/index.js";
 
 describe("Admin Domain Services", () => {
@@ -54,10 +54,15 @@ describe("Admin Domain Services", () => {
 
     const mockFetch = vi.fn().mockImplementation(async (url: string) => {
       capturedUrl = url;
-      return new Response(JSON.stringify({ addressBooks: [{ addressBookId: 10, addressBookName: "Corp Directory" }] }), {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({
+          addressBooks: [{ addressBookId: 10, addressBookName: "Corp Directory" }],
+        }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
     });
 
     const client = new NiceCXoneClient({ fetch: mockFetch as any });
@@ -75,10 +80,13 @@ describe("Admin Domain Services", () => {
 
     const mockFetch = vi.fn().mockImplementation(async (url: string) => {
       capturedUrl = url;
-      return new Response(JSON.stringify({ skills: [{ skillId: 5, skillName: "Support_Inbound" }] }), {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({ skills: [{ skillId: 5, skillName: "Support_Inbound" }] }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
     });
 
     const client = new NiceCXoneClient({ fetch: mockFetch as any });
@@ -96,10 +104,10 @@ describe("Admin Domain Services", () => {
 
     const mockFetch = vi.fn().mockImplementation(async (url: string) => {
       capturedUrl = url;
-      return new Response(
-        JSON.stringify({ unavailableCode: { id: 1, name: "Lunch" } }),
-        { status: 200, headers: { "Content-Type": "application/json" } }
-      );
+      return new Response(JSON.stringify({ unavailableCode: { id: 1, name: "Lunch" } }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
     });
 
     const client = new NiceCXoneClient({ fetch: mockFetch as any });

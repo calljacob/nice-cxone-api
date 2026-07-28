@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi } from "vite-plus/test";
 import NiceCXoneClient from "../../src/index.js";
 
 describe("WFM and Realtime Services", () => {
@@ -13,7 +13,7 @@ describe("WFM and Realtime Services", () => {
       capturedBody = (init?.body as string) || "";
       return new Response(
         JSON.stringify({ agentSchedules: [], start: "2026-07-01", end: "2026-07-07" }),
-        { status: 200, headers: { "Content-Type": "application/json" } }
+        { status: 200, headers: { "Content-Type": "application/json" } },
       );
     });
 
@@ -38,7 +38,7 @@ describe("WFM and Realtime Services", () => {
       capturedUrl = url;
       return new Response(
         JSON.stringify({ agentStates: [{ agentId: 101, agentStateName: "Available" }] }),
-        { status: 200, headers: { "Content-Type": "application/json" } }
+        { status: 200, headers: { "Content-Type": "application/json" } },
       );
     });
 

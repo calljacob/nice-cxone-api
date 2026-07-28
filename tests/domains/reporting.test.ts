@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi } from "vite-plus/test";
 import NiceCXoneClient from "../../src/index.js";
 
 describe("Reporting Domain Services", () => {
@@ -11,7 +11,7 @@ describe("Reporting Domain Services", () => {
         JSON.stringify({
           contacts: [{ contactId: 98765, skillId: 10, duration: 120 }],
         }),
-        { status: 200, headers: { "Content-Type": "application/json" } }
+        { status: 200, headers: { "Content-Type": "application/json" } },
       );
     });
 

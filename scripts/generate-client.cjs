@@ -135,7 +135,7 @@ function resolveRefName(refStr, specPrefix) {
   return `${specPrefix}_${sanitizeIdentifier(rawName)}`;
 }
 
-function schemaToTSType(schema, parentSpec = {}, specPrefix = "", depth = 0) {
+function schemaToTSType(schema, specPrefix = "", depth = 0) {
   if (!schema) return "any";
 
   if (schema.$ref) {
@@ -144,13 +144,11 @@ function schemaToTSType(schema, parentSpec = {}, specPrefix = "", depth = 0) {
 
   if (schema.oneOf || schema.anyOf) {
     const list = schema.oneOf || schema.anyOf;
-    return list.map((s) => schemaToTSType(s, parentSpec, specPrefix, depth + 1)).join(" | ");
+    return list.map((s) => schemaToTSType(s, specPrefix, depth + 1)).join(" | ");
   }
 
   if (schema.allOf) {
-    return schema.allOf
-      .map((s) => schemaToTSType(s, parentSpec, specPrefix, depth + 1))
-      .join(" & ");
+    return schema.allOf.map((s) => schemaToTSType(s, specPrefix, depth + 1)).join(" & ");
   }
 
   const type = schema.type;
@@ -171,9 +169,7 @@ function schemaToTSType(schema, parentSpec = {}, specPrefix = "", depth = 0) {
   }
 
   if (type === "array") {
-    const itemsType = schema.items
-      ? schemaToTSType(schema.items, parentSpec, specPrefix, depth + 1)
-      : "any";
+    const itemsType = schema.items ? schemaToTSType(schema.items, specPrefix, depth + 1) : "any";
     return `Array<${itemsType}>`;
   }
 
@@ -185,7 +181,7 @@ function schemaToTSType(schema, parentSpec = {}, specPrefix = "", depth = 0) {
         const safeName = /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(propName)
           ? propName
           : JSON.stringify(propName);
-        const propType = schemaToTSType(propSchema, parentSpec, specPrefix, depth + 1);
+        const propType = schemaToTSType(propSchema, specPrefix, depth + 1);
         return `${safeName}${isRequired ? "" : "?"}: ${propType};`;
       });
       return `{ ${props.join(" ")} }`;
@@ -193,7 +189,7 @@ function schemaToTSType(schema, parentSpec = {}, specPrefix = "", depth = 0) {
     if (schema.additionalProperties) {
       const addType =
         typeof schema.additionalProperties === "object"
-          ? schemaToTSType(schema.additionalProperties, parentSpec, specPrefix, depth + 1)
+          ? schemaToTSType(schema.additionalProperties, specPrefix, depth + 1)
           : "any";
       return `Record<string, ${addType}>`;
     }
@@ -394,7 +390,7 @@ function processSpec(spec, categoryInfo, specFilename) {
   };
 }
 
-function getCleanPropName(specPrefix, catKey) {
+function getCleanPropName(specPrefix) {
   let clean = specPrefix;
   const prefixes = [
     "Admin",
@@ -485,7 +481,7 @@ ${processed.methods.join("\n\n")}
       const serviceFileName = `${processed.serviceClassName}.ts`;
       fs.writeFileSync(path.join(catDir, serviceFileName), fileContent);
 
-      const propName = getCleanPropName(processed.specPrefix, catKey);
+      const propName = getCleanPropName(processed.specPrefix);
 
       domainSubServices.push({
         name: processed.serviceClassName,

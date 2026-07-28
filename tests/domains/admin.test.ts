@@ -71,7 +71,7 @@ describe("Admin Domain Services", () => {
     expect(capturedUrl).toContain("/address-books");
     expect(result.addressBooks).toHaveLength(1);
 
-    await client.admin.addressbook.deleteAddressbook(10);
+    await client.admin.addressbook.deleteAddressbook("10");
     expect(capturedUrl).toContain("/address-books/10");
   });
 

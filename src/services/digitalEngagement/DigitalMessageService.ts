@@ -574,7 +574,7 @@ export type DigitalMessage_MessageContentToCreate = {
   parameters?: Record<string, any> | Array<any>;
 };
 
-export type DigitalMessage_AttachmentToCreate = any | any;
+export type DigitalMessage_AttachmentToCreate = any;
 
 export interface DigitalMessage_NewRecipient {
   idOnExternalPlatform: string;
@@ -583,7 +583,7 @@ export interface DigitalMessage_NewRecipient {
   isPrivate?: boolean;
 }
 
-export type DigitalMessage_OutboundMessageToCreateBaseSchema = { thread: any } | any;
+export type DigitalMessage_OutboundMessageToCreateBaseSchema = { thread: any };
 
 export type DigitalMessage_OutboundMessageToCreate =
   DigitalMessage_OutboundMessageToCreateBaseSchema & {

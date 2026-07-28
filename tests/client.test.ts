@@ -81,7 +81,7 @@ describe("NiceCXoneClient", () => {
 
     let capturedToken = "";
     const mockFetch = vi.fn().mockImplementation(async (_url: string, init?: RequestInit) => {
-      capturedToken = (init?.headers as Record<string, string>)["Authorization"];
+      capturedToken = ((init?.headers ?? {}) as Record<string, string>)["Authorization"];
       return new Response(JSON.stringify({ addressBooks: [] }), {
         status: 200,
         headers: { "Content-Type": "application/json" },
@@ -147,7 +147,7 @@ describe("NiceCXoneClient", () => {
       fetch: mockFetch as any,
     });
 
-    await client.admin.addressbook.deleteAddressbook(123);
+    await client.admin.addressbook.deleteAddressbook("123");
     expect(capturedUrl).toContain("/address-books/123");
   });
 });

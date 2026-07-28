@@ -355,7 +355,7 @@ export type DigitalContact_ContactStatusUpdate = {
   updatedByUserId?: number;
 };
 
-export type DigitalContact_ContactRoutingQueueUpdate = any | any;
+export type DigitalContact_ContactRoutingQueueUpdate = any;
 
 export type DigitalContact_ContactInboxAssignmentUpdate =
   | { userId: number }
@@ -454,23 +454,7 @@ export interface DigitalContact_ContentRemoved {
 
 export type DigitalContact_ContentRemovedReason = "GDPR" | "TTL" | "other";
 
-export type DigitalContact_ContactRoutingPropertiesUpdate =
-  | any
-  | any
-  | any
-  | any
-  | any
-  | any
-  | any
-  | any
-  | any
-  | any
-  | any
-  | any
-  | any
-  | any
-  | any
-  | any;
+export type DigitalContact_ContactRoutingPropertiesUpdate = any;
 
 export class DigitalContactService {
   constructor(private client: HttpClient) {}

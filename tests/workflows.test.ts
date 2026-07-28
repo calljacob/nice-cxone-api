@@ -60,7 +60,7 @@ describe("Workflow & Advanced Scenarios", () => {
     const authHeaders: string[] = [];
 
     const mockFetch = vi.fn().mockImplementation(async (_url: string, init?: RequestInit) => {
-      const auth = (init?.headers as Record<string, string>)["Authorization"];
+      const auth = ((init?.headers ?? {}) as Record<string, string>)["Authorization"];
       authHeaders.push(auth);
       return new Response(JSON.stringify({ ok: true }), {
         status: 200,
